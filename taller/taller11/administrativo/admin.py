@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+# Importar las clases del modelo
+from administrativo.models import Departamento, Edificio
+admin.site.register(Edificio)
+admin.site.register(Departamento)
