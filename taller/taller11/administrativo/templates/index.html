@@ -33,10 +33,10 @@
           </li>
         {% endfor %}
       </ul>
-        <span><b>Total: $</b> {{ e.obtener_costo_departamentos }}</span>
+        <span><b>Total: $</b> {{ e.obtenerCostoTotal }}</span>
         <br>
-        <span><b>Total de departamentos:</b> {{ e.obtener_cantidad_departamentos }}</span>
-        <br>[<a href="#">+Departamento</a>]
+        <span><b>Total de departamentos:</b> {{ e.obtenerNroCuartos }}</span>
+        <br>[<a href="{ url }">+Departamento</a>]
     </td>
     <td> <a href="#">ver</a> <br>
       <a href="#">editar</a> <br>

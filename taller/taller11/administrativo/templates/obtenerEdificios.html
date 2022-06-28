@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Edificios | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h2>Listado de Edificios</h2>
+    <!-- <h3>Número de departamentos {{ numero_estudiantes }}</h3> -->
+    {% for e in edificios %}
+        
+      {{e}}<br/>
+      <ul>
+      {% for d in e.departamentos.all%}
+          <li>
+              Departamento {{d}}<br/>
+          </li>
+      {% endfor %}
+      </ul>
+      <br/>
+    {% endfor %}
+{% endblock %}
+    
