@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from administrativo.models import *
 
 # Create your views here.
 def index(request):
