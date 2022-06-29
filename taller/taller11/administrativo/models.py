@@ -40,6 +40,7 @@ class Departamento(models.Model):
 
     nombrePropietario = models.CharField(max_length=50)
     costoDepartamento = models.DecimalField(max_digits=10000, decimal_places=2)
+    costoDepartamento = models.IntegerField()
     numeroCuartos = models.IntegerField()
     edificio = models.ForeignKey(Edificio, on_delete=models.CASCADE, related_name="departamentos")
 
