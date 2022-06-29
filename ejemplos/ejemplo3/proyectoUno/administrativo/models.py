@@ -37,5 +37,6 @@ class NumeroTelefonico(models.Model):
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE,
             related_name="numeros_telefonicos")
 
+
     def __str__(self):
         return "%s %s" % (self.telefono, self.tipo)
