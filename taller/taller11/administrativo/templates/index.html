@@ -1,0 +1,58 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Estudiantes | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h3>Número de estudiantes {{ numero_estudiantes }}</h3>
+
+<table id="tabla_datos">
+
+  <thead>
+    <tr>
+      <th>Edificio</th>
+      <th>Direccion</th>
+      <th>Ciudad</th>
+      <th>Tipo </th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+
+  {% for e in edificios %}
+  <tr>
+    <td> {{e.nombre}} </td>
+    <td> {{e.direccion}} </td>
+    <td> {{e.ciudad}} </td>
+    <td> {{e.tipo}} </td>
+    <td>
+      <ul>
+        {% for d in e.departamentos.all %}
+          <li>
+            <span>{{d.nombrePropietario}} - {{d.costoDepartamento}} - {{d.numeroCuartos}} [<a href="#">editar</a>] </span>
+          </li>
+        {% endfor %}
+      </ul>
+        <span><b>Total: $</b> {{ e.obtener_costo_departamentos }}</span>
+        <br>
+        <span><b>Total de departamentos:</b> {{ e.obtener_cantidad_departamentos }}</span>
+        <br>[<a href="#">+Departamento</a>]
+    </td>
+    <td> <a href="#">ver</a> <br>
+      <a href="#">editar</a> <br>
+      <a href="#"
+      onclick="return confirm('¿Está seguro de la eliminación?')" >
+      eliminar</a>
+    </td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#tabla_datos').DataTable();
+  });
+</script>
+
+{% endblock %}
