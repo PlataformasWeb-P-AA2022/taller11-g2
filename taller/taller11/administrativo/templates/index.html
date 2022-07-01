@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<!-- <h3>Número de edifcios {{ numero_estudiantes }}</h3> -->
+<h3>Número de edifcios {{ numero_edificios }}</h3>
 
 <table id="tabla_datos">
 
@@ -14,7 +14,8 @@
       <th>Edificio</th>
       <th>Direccion</th>
       <th>Ciudad</th>
-      <th>Tipo </th>
+      <th>Tipo</th>
+      <th>Departamentos</th>
       <th>Opciones</th>
     </tr>
   </thead>
@@ -36,11 +37,11 @@
         <span><b>Total: $</b> {{ e.obtenerCostoTotal }}</span>
         <br>
         <span><b>Total de departamentos:</b> {{ e.obtenerNroCuartos }}</span>
-        <br>[<a href="{ url }">+Departamento</a>]
+        <br>[<a href="{% url 'crear_departamento_edificio' e.id %}">+Departamento</a>]
     </td>
-    <td> <a href="#">ver</a> <br>
-      <a href="#">editar</a> <br>
-      <a href="#"
+    <td> <a href="{% url 'listar_edificio' e.id %}">ver</a> <br>
+      <a href="{% url 'editar_edificio' e.id %}">editar</a> <br>
+      <a href="{% url 'eliminar_edificio' e.id %}"
       onclick="return confirm('¿Está seguro de la eliminación?')" >
       eliminar</a>
     </td>

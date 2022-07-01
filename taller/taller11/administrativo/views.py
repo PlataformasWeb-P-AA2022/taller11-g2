@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from administrativo.models import *
+from administrativo.forms import *
 
 # Create your views here.
 def index(request):
@@ -32,20 +33,41 @@ def crear_departamento(request):
         formulario = DepartamentoForm()
     diccionario = {'formulario': formulario}
 
-    return render(request, 'crearEdificio.html', diccionario)
+    return render(request, 'crearDepartamento.html', diccionario)
 
-def obtener_edificio(request, id):
-    """
-        Listar los registros del modelo Estudiante,
-        obtenidos de la base de datos.
-    """
-    # a través del ORM de django se obtiene
-    # los registros de la entidad; el listado obtenido
-    # se lo almacena en una variable llamada
-    # estudiantes
+def listar_edificio(request, id):
     edificio = Edificio.objects.get(pk=id)
-    # en la variable tipo diccionario llamada informacion_template
-    # se agregará la información que estará disponible
-    # en el template
     informacion_template = {'edificio': edificio}
-    return render(request, 'obtenerEdificio.html', informacion_template)
+    return render(request, 'listarEdificio.html', informacion_template)
+
+def editar_edificio(request, id):
+    edificio = Edificio.objects.get(pk=id)
+    if request.method=='POST':
+        formulario = EdificioForm(request.POST, instance=edificio)
+        print(formulario.errors)
+        if formulario.is_valid():
+            formulario.save() # se guarda en la base de datos
+            return redirect(index)
+    else:
+        formulario = EdificioForm(instance=edificio)
+    diccionario = {'formulario': formulario}
+
+    return render(request, 'editarEdificio.html', diccionario)
+
+def eliminar_edificio(request, id):
+    edificio = Edificio.objects.get(pk=id)
+    edificio.delete()
+    return redirect(index)
+
+def crear_departamento_edificio(request, id):
+    edificio = Edificio.objects.get(pk=id)
+    if request.method=='POST':
+        formulario = DepartamentoEdificioForm(request.POST, request.POST)
+        print(formulario.errors)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(index)
+    else:
+        formulario = DepartamentoEdificioForm(edificio)
+    diccionario = {'formulario': formulario, 'edificio': edificio}
+    return(render(request, 'crearDepartamentoEdificio.html', diccionario))
